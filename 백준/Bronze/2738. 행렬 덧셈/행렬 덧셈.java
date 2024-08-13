@@ -1,30 +1,35 @@
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		Scanner sc = new Scanner(System.in);
-		int firstIndex = sc.nextInt();
-		int secondIndex = sc.nextInt();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int firstIndex = Integer.parseInt(st.nextToken());
+		int secondIndex = Integer.parseInt(st.nextToken());
 		
 		int[][] matrix1 = new int[firstIndex][secondIndex];
 		int[][] matrix2 = new int[firstIndex][secondIndex];
+		
+		for(int i=0; i<firstIndex; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0; j<secondIndex; j++) {
+				matrix1[i][j] = Integer.parseInt(st.nextToken());
+			}
+		}
 
 		for(int i=0; i<firstIndex; i++) {
+			st = new StringTokenizer(br.readLine());
 			for(int j=0; j<secondIndex; j++) {
-				matrix1[i][j] = sc.nextInt();
+				matrix2[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
 		
 		for(int i=0; i<firstIndex; i++) {
 			for(int j=0; j<secondIndex; j++) {
-				matrix2[i][j] = sc.nextInt();
-			}
-		}
-		
-		for(int i=0; i<matrix1.length; i++) {
-			for(int j=0; j<matrix1[i].length; j++) {
 				System.out.print(matrix1[i][j] + matrix2[i][j] + " ");
 			}
 			System.out.println();
