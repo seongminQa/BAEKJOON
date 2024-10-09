@@ -1,12 +1,14 @@
 class Solution {
     public int[] solution(long n) {
-        String str = String.valueOf(n);
-        int[] answer = new int[str.length()];
+        String number = String.valueOf(n);
+        int[] result = new int[number.length()];
+        int idx = 0;
         
-        for(int i=0; i<str.length(); i++) {
-            answer[i] = str.charAt(str.length()-(i+1)) - '0';
+        for(int i=number.length()-1; i>=0; i--) {
+            result[idx] = number.charAt(i) - '0';
+            ++idx;
         }
         
-        return answer;
+        return result;
     }
 }
