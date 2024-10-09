@@ -1,27 +1,18 @@
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 class Solution {
     public long solution(long n) {
-        String num1 = String.valueOf(n);
+        long result = 0;
+        String[] num = String.valueOf(n).split("");
+        Arrays.sort(num);
+        String str = "";
         
-        System.out.println(num1);
-
-        String[] num2 = num1.split("");
-        
-        for(int i=0; i<num2.length; i++) {
-            System.out.print(num2[i]);
-        }
-        System.out.println();
-        Arrays.sort(num2, Collections.reverseOrder());
-        
-        String result = "";
-        
-        for(int i=0; i<num2.length; i++) {
-            System.out.print(num2[i]);
-            result += num2[i];
+        for(int i=num.length-1; i>=0; i--) {
+            str += num[i];
         }
         
-        return Long.parseLong(result);
+        result = Long.parseLong(str);
+        
+        return result;
     }
 }
