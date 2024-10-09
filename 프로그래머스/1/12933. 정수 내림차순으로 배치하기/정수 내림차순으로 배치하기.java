@@ -1,18 +1,25 @@
-import java.util.*;
+// '버블 정렬'을 사용하여 풀어보기
 
 class Solution {
     public long solution(long n) {
-        long result = 0;
-        String[] num = String.valueOf(n).split("");
-        Arrays.sort(num);
-        String str = "";
+        String result = "";
+        String[] number = String.valueOf(n).split("");
         
-        for(int i=num.length-1; i>=0; i--) {
-            str += num[i];
+        for(int i=0; i<number.length; i++) {
+            for(int j=0; j<number.length-1; j++) {
+                if(Integer.parseInt(number[j]) > Integer.parseInt(number[j+1])) {
+                    int temp = Integer.parseInt(number[j]);
+                    number[j] = number[j+1];
+                    number[j+1] = String.valueOf(temp);
+                }
+            }
         }
         
-        result = Long.parseLong(str);
+        for(int i=0; i<number.length; i++) {
+            System.out.println("number[" + i + "] = " + number[i]);
+            result = number[i] + result;
+        }
         
-        return result;
+        return Long.parseLong(result);
     }
 }
