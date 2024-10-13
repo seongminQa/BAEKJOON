@@ -3,10 +3,13 @@ class Solution {
         int result = 0;
         
         for(int i=left; i<=right; i++) {
-            if(Math.sqrt(i) % 1.0 == 0) result -= i;
-            else result += i;
+            boolean check = true;
+            for(int j=1; j<=i; j++) {
+                if(i % j == 0) check = !check;
+            }
+            if(check) result += i;
+            else result -= i;
         }
-        
         return result;
     }
 }
