@@ -1,20 +1,23 @@
 class Solution {
     public int solution(int number, int limit, int power) {
-        int result = 1;
-        
-        for(int i=2; i<=number; i++) {
-            int num = i;
-            int divisorCnt = 1;
-            // System.out.println("num = " + num +"의 sqrt = " + Math.sqrt(num));
-            for(int j=1; j<=num/2; j++) {
-                if(num % j == 0) ++divisorCnt;
+        int result = 0;
+        int[] cnt = new int[number];
+
+        for(int i=1; i<=number; i++) {
+            int value = 0;
+            
+            for(int j=1; j*j<=i; j++) {
+                if(i % j == 0) {
+                    ++value;
+                    if(j != i / j) {
+                        ++value;
+                    }
+                }
             }
-            // System.out.println("num = " + num +"의 약수갯수 = " + divisorCnt);
-            if(divisorCnt <= limit) {
-                result += divisorCnt;
-            } else {
-                result += power;
-            }
+            cnt[i-1] = value;
+            
+            if(cnt[i-1] <= limit) result += cnt[i-1];
+            else result += power;
         }
         
         return result;
