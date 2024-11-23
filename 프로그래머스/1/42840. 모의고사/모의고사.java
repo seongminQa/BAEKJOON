@@ -1,34 +1,47 @@
 import java.util.*;
 
 class Solution {
-    public Integer[] solution(int[] answers) {
-        int[] a = {1,2,3,4,5};
-        int[] b = {2,1,2,3,2,4,2,5};
-        int[] c = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
-        int max = 0;
+    public int[] solution(int[] answers) {
+        int[] person_1 = {1,2,3,4,5};
+        int[] person_2 = {2,1,2,3,2,4,2,5};
+        int[] person_3 = {3,3,1,1,2,2,4,4,5,5};
+        
         int[] score = new int[3];
-        List<Integer> list = new ArrayList<>();
         
         for(int i=0; i<answers.length; i++) {
-            if(a[i % a.length] == answers[i]) score[0]++;
-            if (b[i % b.length] == answers[i]) score[1]++;
-            if (c[i % c.length] == answers[i]) score[2]++;
+            if(person_1[i%person_1.length] == answers[i]) {
+                ++score[0];
+            }
+            if(person_2[i%person_2.length] == answers[i]) {
+                ++score[1];
+            }
+            if(person_3[i%person_3.length] == answers[i]) {
+                ++score[2];
+            }
         }
+        
+        int max = Integer.MIN_VALUE;
         
         for(int i : score) {
             if(i >= max) max = i;
         }
         
-        int cnt = 1;
-        for(int i : score) {
-            if(i >= max) {
-                list.add(cnt);
-            }
-            ++cnt;
+        List<Integer> list = new ArrayList<>();
+        
+        for(int i=0; i<score.length; i++) {
+            if(score[i] == max) list.add(i+1);
         }
         
-        Integer[] array = list.toArray(new Integer[0]);
+        int[] result = new int[list.size()];
+        if(list.size() > 1) {
+            for(int i=0; i<list.size(); i++) {
+                result[i] = list.get(i);
+            }
+            Arrays.sort(result);
+        } else {
+            result[0] = list.get(0);
+        }
         
-        return array;
+        return result;
     }
 }
