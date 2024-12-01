@@ -1,73 +1,44 @@
 class Solution {
     public int solution(String dartResult) {
-        int result = 0;
-        double[] storage = new double[3];
+        double[] score = new double[3];
         int idx = 0;
+        
+        StringBuilder sb = new StringBuilder();
         
         for(int i=0; i<dartResult.length(); i++) {
             char c = dartResult.charAt(i);
             
+            if(c != 'S' && c != 'D' && c != 'T' && c != '*' && c != '#') {
+                sb.append(c);
+            }
+            // System.out.println(sb.toString());
+            
             if(c == 'S') {
-                if(i >= 2) {
-                    if(dartResult.charAt(i-2) == '1') {
-                        storage[idx] = Math.pow(10, 1);
-                        ++idx;
-                    } else {
-                        storage[idx] = Math.pow(dartResult.charAt(i-1)-'0', 1);
-                        ++idx;
-                    }
-                } else {
-                    storage[idx] = Math.pow(dartResult.charAt(i-1)-'0', 1);
-                        ++idx;
-                }
+                score[idx] = Math.pow(Integer.parseInt(sb.toString()), 1);
+                sb.setLength(0);
+                ++idx;
             } else if(c == 'D') {
-                if(i >= 2) {
-                    if(dartResult.charAt(i-2) == '1') {
-                        storage[idx] = Math.pow(10, 2);
-                        ++idx;
-                    } else {
-                        storage[idx] = Math.pow(dartResult.charAt(i-1)-'0', 2);
-                        ++idx;
-                    }
-                } else {
-                    storage[idx] = Math.pow(dartResult.charAt(i-1)-'0', 2);
-                        ++idx;
-                }
+                score[idx] = Math.pow(Integer.parseInt(sb.toString()), 2);
+                sb.setLength(0);
+                ++idx;
             } else if(c == 'T') {
-                if(i >= 2) {
-                    if(dartResult.charAt(i-2) == '1') {
-                        storage[idx] = Math.pow(10, 3);
-                        ++idx;
-                    } else {
-                        storage[idx] = Math.pow(dartResult.charAt(i-1)-'0', 3);
-                        ++idx;
-                    }
-                } else {
-                    storage[idx] = Math.pow(dartResult.charAt(i-1)-'0', 3);
-                        ++idx;
-                }
+                score[idx] = Math.pow(Integer.parseInt(sb.toString()), 3);
+                sb.setLength(0);
+                ++idx;
             }
             
             if(c == '*') {
-                System.out.println("idx = " + idx);
-                if(idx == 1) {
-                    storage[idx-1] = storage[idx-1]*2;
+                if(idx > 1) {
+                    score[idx-2] *= 2;
+                    score[idx-1] *= 2;
                 } else {
-                    storage[idx-2] = storage[idx-2]*2;
-                    storage[idx-1] = storage[idx-1]*2;
+                    score[idx-1] *= 2;
                 }
             } else if(c == '#') {
-                System.out.println("idx = " + idx);
-                storage[idx-1] = storage[idx-1]*(-1);
+                score[idx-1] *= -1;
             }
-            
         }
         
-        for(double num : storage) {
-            // System.out.println(num);
-            result += num;
-        }
-
-        return result;
+        return (int) (score[0] + score[1] + score[2]);
     }
 }
